@@ -43,7 +43,7 @@
     "test": "test"
   },
   "gypfile": true,
-  "homepage": "https://github.com/devongovett/font-manager",
+  "homepage": "https://github.com/jiajiaobj/fontmanager-zh",
   "keywords": [
     "font",
     "find",
@@ -56,7 +56,7 @@
   "name": "fontmanager-zh",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Eugeny/fontmanager-redux.git"
+    "url": "git@github.com:jiajiaobj/fontmanager-zh.git"
   },
   "scripts": {
     "install": "node-gyp rebuild",
