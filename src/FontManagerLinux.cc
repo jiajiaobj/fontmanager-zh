@@ -105,15 +105,31 @@ FontDescriptor *createFontDescriptor(FcPattern *pattern) {
   FcChar8 *path, *psName, *family, *style;
   int weight, width, slant, spacing;
 
-  FcPatternGetString(pattern, FC_FILE, 0, &path);
-  FcPatternGetString(pattern, FC_POSTSCRIPT_NAME, 0, &psName);
-  FcPatternGetString(pattern, FC_FAMILY, 0, &family);
-  FcPatternGetString(pattern, FC_STYLE, 0, &style);
+  if (FcPatternGetString(pattern, FC_FILE, 0, &path) != FcResultMatch) {
+    path = NULL;
+  }
+  if (FcPatternGetString(pattern, FC_POSTSCRIPT_NAME, 0, &psName) != FcResultMatch) {
+    psName = NULL;
+  }
+  if (FcPatternGetString(pattern, FC_FAMILY, 0, &family) != FcResultMatch) {
+    family = NULL;
+  }
+  if (FcPatternGetString(pattern, FC_STYLE, 0, &style) != FcResultMatch) {
+    style = NULL;
+  }
 
-  FcPatternGetInteger(pattern, FC_WEIGHT, 0, &weight);
-  FcPatternGetInteger(pattern, FC_WIDTH, 0, &width);
-  FcPatternGetInteger(pattern, FC_SLANT, 0, &slant);
-  FcPatternGetInteger(pattern, FC_SPACING, 0, &spacing);
+  if (FcPatternGetInteger(pattern, FC_WEIGHT, 0, &weight) != FcResultMatch) {
+    weight = 0;
+  }
+  if (FcPatternGetInteger(pattern, FC_WIDTH, 0, &width)!= FcResultMatch) {
+    width = 0;
+  }
+  if (FcPatternGetInteger(pattern, FC_SLANT, 0, &slant) != FcResultMatch) {
+    slant = -1;
+  }
+  if (FcPatternGetInteger(pattern, FC_SPACING, 0, &spacing) != FcResultMatch) {
+    spacing = -1;
+  }
 
   return new FontDescriptor(
     (char *) path,

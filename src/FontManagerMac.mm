@@ -35,11 +35,9 @@ static int convertWidth(float unit) {
 
 FontDescriptor *createFontDescriptor(CTFontDescriptorRef descriptor) {
   NSURL *url = (NSURL *) CTFontDescriptorCopyAttribute(descriptor, kCTFontURLAttribute);
-  CFStringRef language = CFStringCreateWithCString(CFAllocatorGetDefault(), "zh-CN", kCFStringEncodingUTF8);
-  NSString *psName = (NSString *) CTFontDescriptorCopyAttribute(descriptor, kCTFontNameAttribute);
+  NSString *psName = (NSString *) CTFontDescriptorCopyAttribute(descriptor, kCTFontNameAttribute);  
   NSString *family = (NSString *) CTFontDescriptorCopyAttribute(descriptor, kCTFontFamilyNameAttribute);
-  NSString *familyLocal = (NSString *) CTFontDescriptorCopyLocalizedAttribute(descriptor, kCTFontFamilyNameAttribute, & language);
-  NSString *style = (NSString *) CTFontDescriptorCopyLocalizedAttribute(descriptor, kCTFontStyleNameAttribute, & language);
+  NSString *style = (NSString *) CTFontDescriptorCopyAttribute(descriptor, kCTFontStyleNameAttribute);
   
   NSDictionary *traits = (NSDictionary *) CTFontDescriptorCopyAttribute(descriptor, kCTFontTraitsAttribute);
   NSNumber *weightVal = traits[(id)kCTFontWeightTrait];
@@ -55,7 +53,6 @@ FontDescriptor *createFontDescriptor(CTFontDescriptorRef descriptor) {
     [[url path] UTF8String],
     [psName UTF8String],
     [family UTF8String],
-    [familyLocal UTF8String],
     [style UTF8String],
     weight,
     width,
@@ -66,7 +63,6 @@ FontDescriptor *createFontDescriptor(CTFontDescriptorRef descriptor) {
   [url release];
   [psName release];
   [family release];
-  [familyLocal release];
   [style release];
   [traits release];
   return res;

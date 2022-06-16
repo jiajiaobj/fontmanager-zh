@@ -23,7 +23,8 @@ DEFS_Debug := \
 CFLAGS_Debug := \
 	-O0 \
 	-gdwarf-2 \
-	-mmacosx-version-min=10.13 \
+	-fvisibility=hidden \
+	-mmacosx-version-min=10.7 \
 	-arch x86_64 \
 	-Wall \
 	-Wendif-labels \
@@ -39,7 +40,6 @@ CFLAGS_CC_Debug := \
 	-std=gnu++1y \
 	-stdlib=libc++ \
 	-fno-rtti \
-	-fno-exceptions \
 	-fno-strict-aliasing
 
 # Flags passed to only ObjC files.
@@ -56,7 +56,7 @@ INCS_Debug := \
 	-I/Users/tianshounian/Library/Caches/node-gyp/14.4.0/deps/uv/include \
 	-I/Users/tianshounian/Library/Caches/node-gyp/14.4.0/deps/zlib \
 	-I/Users/tianshounian/Library/Caches/node-gyp/14.4.0/deps/v8/include \
-	-I$(srcdir)/../nan
+	-I/Users/tianshounian/qimengs/fontlist/node_modules/node-addon-api
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=fontmanager' \
@@ -76,7 +76,8 @@ DEFS_Release := \
 CFLAGS_Release := \
 	-O3 \
 	-gdwarf-2 \
-	-mmacosx-version-min=10.13 \
+	-fvisibility=hidden \
+	-mmacosx-version-min=10.7 \
 	-arch x86_64 \
 	-Wall \
 	-Wendif-labels \
@@ -92,7 +93,6 @@ CFLAGS_CC_Release := \
 	-std=gnu++1y \
 	-stdlib=libc++ \
 	-fno-rtti \
-	-fno-exceptions \
 	-fno-strict-aliasing
 
 # Flags passed to only ObjC files.
@@ -109,7 +109,7 @@ INCS_Release := \
 	-I/Users/tianshounian/Library/Caches/node-gyp/14.4.0/deps/uv/include \
 	-I/Users/tianshounian/Library/Caches/node-gyp/14.4.0/deps/zlib \
 	-I/Users/tianshounian/Library/Caches/node-gyp/14.4.0/deps/v8/include \
-	-I$(srcdir)/../nan
+	-I/Users/tianshounian/qimengs/fontlist/node_modules/node-addon-api
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/FontManager.o \
@@ -154,7 +154,7 @@ LDFLAGS_Debug := \
 	-undefined dynamic_lookup \
 	-Wl,-no_pie \
 	-Wl,-search_paths_first \
-	-mmacosx-version-min=10.13 \
+	-mmacosx-version-min=10.7 \
 	-arch x86_64 \
 	-L$(builddir) \
 	-stdlib=libc++
@@ -168,7 +168,7 @@ LDFLAGS_Release := \
 	-undefined dynamic_lookup \
 	-Wl,-no_pie \
 	-Wl,-search_paths_first \
-	-mmacosx-version-min=10.13 \
+	-mmacosx-version-min=10.7 \
 	-arch x86_64 \
 	-L$(builddir) \
 	-stdlib=libc++

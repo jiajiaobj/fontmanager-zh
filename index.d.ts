@@ -1,4 +1,4 @@
-declare module 'font-manager' {
+declare module 'fontmanager-redux' {
     export interface FontDescriptor {
         readonly path: string;
         readonly style: string;
@@ -23,7 +23,7 @@ declare module 'font-manager' {
 
     /**
      * Fetches fonts in the system
-     * 
+     *
      * @example
      * getAvailableFontsSync();
      * @returns All fonts descriptors available
@@ -32,7 +32,7 @@ declare module 'font-manager' {
 
     /**
      * Returns trough a callback all fonts descriptors available on the system
-     * 
+     *
      * @param callback Contains the font data
      * @example
      * getAvailableFonts((fonts) => { ... });
@@ -52,7 +52,7 @@ declare module 'font-manager' {
 
     /**
      * Queries all the fonts in the system matching the given parameters
-     * 
+     *
      * @param fontDescriptor Query parameters
      * @param callback Contains the font data
      * @example
@@ -65,7 +65,7 @@ declare module 'font-manager' {
      * Find only one font matching the given query. This function always returns
      * a result (never null), so sometimes the output will not exactly match the
      * input font descriptor if not all input parameters could be met
-     * 
+     *
      * @param fontDescriptor Query parameters
      * @example
      * findFontSync({ family: 'Arial', weight: 700 });
@@ -95,7 +95,7 @@ declare module 'font-manager' {
      * characteristics (bold, italic, etc) are used to find a suitable
      * replacement. If the font already contains the characters in text, it is
      * not replaced and the font descriptor for the original font is returned
-     * 
+     *
      * @param postscriptName Name of the font to be replaced
      * @param text Characters for matching
      * @returns Only one font description matching the function description

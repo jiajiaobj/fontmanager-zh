@@ -18,11 +18,20 @@ describe('font-manager', function() {
   });
   
   function assertFontDescriptor(font) {
+    // NOTE: Both postscript name and style may missing on fonts like Noto Sans Sinhala.
     assert.equal(typeof font, 'object');
     assert.equal(typeof font.path, 'string');
-    assert.equal(typeof font.postscriptName, 'string');
+    if (font.postscriptName) {
+      assert.equal(typeof font.postscriptName, 'string');
+    } else {
+      assert.equal(typeof font.postscriptName, 'undefined');
+    }
     assert.equal(typeof font.family, 'string');
-    assert.equal(typeof font.style, 'string');
+    if (font.style) {
+      assert.equal(typeof font.style, 'string');
+    } else {
+      assert.equal(typeof font.style, 'undefined');
+    }
     assert.equal(typeof font.weight, 'number');
     assert.equal(typeof font.width, 'number');
     assert.equal(typeof font.italic, 'boolean');
