@@ -36,6 +36,7 @@ public:
   const char *path;
   const char *postscriptName;
   const char *family;
+  const char *familyLocal;
   const char *style;
   FontWeight weight;
   FontWidth width;
@@ -46,6 +47,7 @@ public:
     path = NULL;
     postscriptName = getString(obj.Get("postscriptName"));
     family = getString(obj.Get("family"));
+    familyLocal = getString(obj.Get("familyLocal"));
     style = getString(obj.Get("style"));
     weight = static_cast<FontWeight>(getNumber(obj.Get("weight")));
     width = static_cast<FontWidth>(getNumber(obj.Get("width")));
@@ -57,6 +59,7 @@ public:
     path = NULL;
     postscriptName = NULL;
     family = NULL;
+    familyLocal = NULL;
     style = NULL;
     weight = FontWeightUndefined;
     width = FontWidthUndefined;
@@ -64,11 +67,12 @@ public:
     monospace = false;
   }
 
-  FontDescriptor(const char *path, const char *postscriptName, const char *family, const char *style,
+  FontDescriptor(const char *path, const char *postscriptName, const char *family, const char *familyLocal,  const char *style,
                  FontWeight weight, FontWidth width, bool italic, bool monospace) {
     this->path = copyString(path);
     this->postscriptName = copyString(postscriptName);
     this->family = copyString(family);
+    this->familyLocal = copyString(familyLocal);
     this->style = copyString(style);
     this->weight = weight;
     this->width = width;
@@ -80,6 +84,7 @@ public:
     path = copyString(desc->path);
     postscriptName = copyString(desc->postscriptName);
     family = copyString(desc->family);
+    familyLocal = copyString(desc->familyLocal);
     style = copyString(desc->style);
     weight = desc->weight;
     width = desc->width;
@@ -97,11 +102,15 @@ public:
     if (family)
       delete family;
 
+    if (familyLocal)
+      delete familyLocal;
+
     if (style)
       delete style;
 
     postscriptName = NULL;
     family = NULL;
+    familyLocal = NULL;
     style = NULL;
   }
 
@@ -115,6 +124,9 @@ public:
     }
     if (family) {
       res.Set("family", Napi::String::New(env, family));
+    }
+    if (familyLocal) {
+      res.Set("familyLocal", Napi::String::New(env, familyLocal));
     }
     if (style) {
       res.Set("style", Napi::String::New(env, style));

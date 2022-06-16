@@ -23,7 +23,7 @@ char *utf16ToUtf8(const WCHAR *input) {
 }
 
 // returns the index of the user's locale in the set of localized strings
-unsigned int getLocaleIndex(IDWriteLocalizedStrings *strings) {
+unsigned int getLocaleIndex(IDWriteLocalizedStrings *strings) {/*{{{*/
   unsigned int index = 0;
   BOOL exists = false;
   wchar_t localeName[LOCALE_NAME_MAX_LENGTH];
@@ -45,10 +45,10 @@ unsigned int getLocaleIndex(IDWriteLocalizedStrings *strings) {
     index = 0;
 
   return index;
-}
+}/*}}}*/
 
 // gets a localized string for a font
-char *getString(IDWriteFont *font, DWRITE_INFORMATIONAL_STRING_ID string_id) {
+char *getString(IDWriteFont *font, DWRITE_INFORMATIONAL_STRING_ID string_id) {/*{{{*/
   char *res = NULL;
   IDWriteLocalizedStrings *strings = NULL;
 
@@ -82,9 +82,9 @@ char *getString(IDWriteFont *font, DWRITE_INFORMATIONAL_STRING_ID string_id) {
   }
   
   return res;
-}
+}/*}}}*/
 
-FontDescriptor *resultFromFont(IDWriteFont *font) {
+FontDescriptor *resultFromFont(IDWriteFont *font) {/*{{{*/
   FontDescriptor *res = NULL;
   IDWriteFontFace *face = NULL;
   unsigned int numFiles = 0;
@@ -120,6 +120,7 @@ FontDescriptor *resultFromFont(IDWriteFont *font) {
       char *psName = utf16ToUtf8(name);
       char *postscriptName = getString(font, DWRITE_INFORMATIONAL_STRING_POSTSCRIPT_NAME);
       char *family = getString(font, DWRITE_INFORMATIONAL_STRING_WIN32_FAMILY_NAMES);
+      char *familyLocal = getString(font, DWRITE_INFORMATIONAL_STRING_WIN32_FAMILY_NAMES);
       char *style = getString(font, DWRITE_INFORMATIONAL_STRING_WIN32_SUBFAMILY_NAMES);
 
       bool monospace = false;
@@ -135,6 +136,7 @@ FontDescriptor *resultFromFont(IDWriteFont *font) {
         psName,
         postscriptName,
         family,
+				familyLocal,
         style,
         (FontWeight) font->GetWeight(),
         (FontWidth) font->GetStretch(),
@@ -146,6 +148,7 @@ FontDescriptor *resultFromFont(IDWriteFont *font) {
       delete name;
       delete postscriptName;
       delete family;
+			delete familyLocal;
       delete style;
       fileLoader->Release();
     }
@@ -157,9 +160,9 @@ FontDescriptor *resultFromFont(IDWriteFont *font) {
   files->Release();
 
   return res;
-}
+}/*}}}*/
 
-ResultSet *getAvailableFonts() {
+ResultSet *getAvailableFonts() {/*{{{*/
   ResultSet *res = new ResultSet();
   int count = 0;
 
@@ -206,13 +209,16 @@ ResultSet *getAvailableFonts() {
   factory->Release();
 
   return res;
-}
+}/*}}}*/
 
-bool resultMatches(FontDescriptor *result, FontDescriptor *desc) {
+bool resultMatches(FontDescriptor *result, FontDescriptor *desc) {/*{{{*/
   if (desc->postscriptName && strcmp(desc->postscriptName, result->postscriptName) != 0)
     return false;
 
   if (desc->family && strcmp(desc->family, result->family) != 0)
+    return false;
+
+  if (desc->familyLocal && strcmp(desc->familyLocal, result->familyLocal) != 0)
     return false;
 
   if (desc->style && strcmp(desc->style, result->style) != 0)
@@ -231,9 +237,9 @@ bool resultMatches(FontDescriptor *result, FontDescriptor *desc) {
     return false;
 
   return true;
-}
+}/*}}}*/
 
-ResultSet *findFonts(FontDescriptor *desc) {
+ResultSet *findFonts(FontDescriptor *desc) {/*{{{*/
   ResultSet *fonts = getAvailableFonts();
 
   for (ResultSet::iterator it = fonts->begin(); it != fonts->end();) {
@@ -246,9 +252,9 @@ ResultSet *findFonts(FontDescriptor *desc) {
   }
 
   return fonts;
-}
+}/*}}}*/
 
-FontDescriptor *findFont(FontDescriptor *desc) {
+FontDescriptor *findFont(FontDescriptor *desc) {/*{{{*/
   ResultSet *fonts = findFonts(desc);
 
   // if we didn't find anything, try again with only the font traits, no string names
@@ -281,10 +287,10 @@ FontDescriptor *findFont(FontDescriptor *desc) {
   // whoa, weird. no fonts installed or something went wrong.
   delete fonts;
   return NULL;
-}
+}/*}}}*/
 
 // custom text renderer used to determine the fallback font for a given char
-class FontFallbackRenderer : public IDWriteTextRenderer {
+class FontFallbackRenderer : public IDWriteTextRenderer {/*{{{*/
 public:
   IDWriteFontCollection *systemFonts;
   IDWriteFont *font;
@@ -397,9 +403,9 @@ public:
     this->AddRef();
     return S_OK;
   }
-};
+};/*}}}*/
 
-FontDescriptor *substituteFont(char *postscriptName, char *string) {
+FontDescriptor *substituteFont(char *postscriptName, char *string) {/*{{{*/
   FontDescriptor *res = NULL;
 
   IDWriteFactory *factory = NULL;
@@ -487,4 +493,4 @@ FontDescriptor *substituteFont(char *postscriptName, char *string) {
   factory->Release();
 
   return res;
-}
+}/*}}}*/
