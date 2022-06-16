@@ -1,0 +1,67 @@
+{
+  "_from": "fontmanager-zh",
+  "_id": "fontmanager-zh@0.3.15",
+  "_inBundle": false,
+  "_integrity": "sha512-dviUpGy5/KePE636uI6B1IKY4/ekNERtlj0R/QtQcj01sofxhb7WgVVzVaxCfwBYA8nFu9yLm3Q0/lciO0QMag==",
+  "_location": "/fontmanager-zh",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "fontmanager-zh",
+    "name": "fontmanager-zh",
+    "escapedName": "fontmanager-zh",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/fontmanager-zh/-/fontmanager-zh-0.3.15.tgz",
+  "_shasum": "7d9bd39c89d3d0084923566f11d8b1d0008b7d53",
+  "_spec": "fontmanager-zh",
+  "_where": "/Users/tianshounian/qimengs/fontlist",
+  "author": {
+    "name": "Devon Govett",
+    "email": "devongovett@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/devongovett/font-manager/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "nan": "^2.13.2"
+  },
+  "deprecated": false,
+  "description": "Provides access to the system font catalog",
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "gypfile": true,
+  "homepage": "https://github.com/devongovett/font-manager",
+  "keywords": [
+    "font",
+    "find",
+    "search",
+    "substitute",
+    "enumerate"
+  ],
+  "license": "MIT",
+  "main": "build/Release/fontmanager",
+  "name": "fontmanager-zh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eugeny/fontmanager-redux.git"
+  },
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "test": "mocha"
+  },
+  "types": "index.d.ts",
+  "version": "0.3.15"
+}
