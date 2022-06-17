@@ -1,6 +1,6 @@
 {
   "_from": "fontmanager-zh",
-  "_id": "fontmanager-zh@0.3.17",
+  "_id": "fontmanager-zh@0.4.0",
   "_inBundle": false,
   "_integrity": "sha512-dviUpGy5/KePE636uI6B1IKY4/ekNERtlj0R/QtQcj01sofxhb7WgVVzVaxCfwBYA8nFu9yLm3Q0/lciO0QMag==",
   "_location": "/fontmanager-zh",
@@ -19,7 +19,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/fontmanager-zh/-/fontmanager-zh-0.3.17.tgz",
+  "_resolved": "https://registry.npmjs.org/fontmanager-zh/-/fontmanager-zh-0.4.0.tgz",
   "_shasum": "7d9bd39c89d3d0084923566f11d8b1d0008b7d53",
   "_spec": "fontmanager-zh",
   "_where": "/Users/tianshounian/qimengs/fontlist",
@@ -63,5 +63,5 @@
     "test": "mocha"
   },
   "types": "index.d.ts",
-  "version": "0.3.17"
+  "version": "0.4.0"
 }
